@@ -33,16 +33,10 @@ app.use('/api/orders', orderRouter)
 app.use('/api/admin', adminRouter)
 
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 app.get('/api/key/paypal', (req, res)=>{
     res.send(process.env.PAYPAL_CLIENT_ID || 'sandbox')
 })
-
-// const __dirname = path.resolve();
-// app.use(express.static(path.join(__dirname, '/frontend/build')));
-// app.get('*', (req, res)=>{
-//     res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
-// });
 
 app.use((err,req,res,next)=>{
     res.status(500).send({message:err.message});
